@@ -6,8 +6,9 @@
 
 	<title>{{ title }}</title>
 
-	<meta name="description" content="Teilerliste und Anmeldeformular der Stadtmeisterschaft">
-	<meta name="author" content="SK Langen e.V.">
+	{% for name, content in meta.items() %}
+		<meta name="{{ name }}" content="{{ content }}">
+	{% endfor %}
 
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>

@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, flash, redirect
 from signup_form import SignupForm
+from meta import meta
 import os
 import sys
 
@@ -34,9 +35,10 @@ def signup():
 def home():
 	form = SignupForm(request.form)
 	return render_template(
-		'home.html', 
+		'home.html',
 		title='Stadtmeisterschaft',
-		form=form
+		form=form,
+		meta=meta
 	)
 
 
@@ -48,4 +50,3 @@ def main():
 
 if __name__ == '__main__':
 	main()
-		
