@@ -1,0 +1,45 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<title>{{ title }}</title>
+
+	<meta name="description" content="Teilerliste und Anmeldeformular der Stadtmeisterschaft">
+	<meta name="author" content="SK Langen e.V.">
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+	<h2 id="title">{{ title }}</h2>
+
+	{% with messages = get_flashed_messages(with_categories=true) %}
+		{% if messages %}
+			<ul id="flashes">
+                {% for category, message in messages %}
+				 	<li class="{{ category }}">{{ message }}</li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+	{% endwith %}
+
+	<form action="/signup" id="signup_form" method="POST">
+		<table>
+			{% for field in [form.firstname, form.lastname, form.club, form.dwz, form.email] %}
+				<tr>
+					<td>{{ field.label }}</td>
+					<td>{{ field }}</td>
+				</tr>
+			{% endfor %}
+			<tr>
+				<td><input type="submit" value="Teilnehmen"></td>
+				<td><input type="reset" value="Löschen"></td>
+			</tr>
+		</table>
+	</form>
+
+	<script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
