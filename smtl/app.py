@@ -1,7 +1,6 @@
 from flask import Flask, request, render_template, flash, redirect
-from signup_form import SignupForm
-from meta import meta
-import os
+from smtl.signup_form import SignupForm
+from smtl.meta import meta
 import sys
 
 
@@ -40,13 +39,3 @@ def home():
 		form=form,
 		meta=meta
 	)
-
-
-
-def main():
-	port = int(os.environ.get('PORT', 5000))
-	app.run(host='0.0.0.0', port=port, debug=True)
-
-
-if __name__ == '__main__':
-	main()
