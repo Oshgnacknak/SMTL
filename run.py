@@ -1,10 +1,13 @@
 from smtl.app import app
+from config import config
 import os
 
 
 def main():
-	port = int(os.environ.get('PORT', 5000))
-	app.run(host='0.0.0.0', port=port, debug=True)
+	host = config.get('HOST', '127.0.0.1')
+	port = config.get('PORT', 5000)
+	debug = config.get('DEBUG', False)
+	app.run(host='0.0.0.0', port=port, debug=debug)
 
 
 if __name__ == '__main__':

@@ -1,0 +1,11 @@
+
+# create your config here and safe as 'config.py'
+# 'SECRET_KEY' must be set. $ head -c 32 /dev/random | sha1sum
+# the rest is optional
+
+config = {
+    'SECRET_KEY': 'some_good_key',
+    'DEBUG': False,
+    'HOST': '127.0.0.1',
+    'POST': 5000
+}

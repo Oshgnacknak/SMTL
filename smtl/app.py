@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, flash, redirect
 from smtl.signup_form import SignupForm
 from smtl.meta import meta
+from config import config
 import sys
 
 
@@ -11,7 +12,7 @@ def add_to_db(data):
 # App config.
 app = Flask(__name__)
 app.config.from_object(__name__)
-app.config['SECRET_KEY'] = '7d441f27d441f27567d441f2b6176a'
+app.config['SECRET_KEY'] = config['SECRET_KEY']
 
 
 @app.route('/signup', methods=['POST'])
