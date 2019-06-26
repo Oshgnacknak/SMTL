@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template, flash, redirect
+from flask_wtf.csrf import CSRFProtect
 from smtl.signup_form import SignupForm
 from smtl.meta import meta
 from config import config
@@ -10,7 +11,9 @@ def add_to_db(data):
 
 
 # App config.
+csrf = CSRFProtect()
 app = Flask(__name__)
+csrf.init_app(app)
 app.config.from_object(__name__)
 app.config['SECRET_KEY'] = config['SECRET_KEY']
 
