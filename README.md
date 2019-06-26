@@ -6,7 +6,7 @@ list and the singup form written in python/flask.
 
 ## How to Run
 
-```sh
+```
 # Clone this repository
 git clone git@github.com:Oshgnacknak/SMTL.git
 

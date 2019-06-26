@@ -5,6 +5,7 @@
 
 config = {
     'SECRET_KEY': 'some_good_key',
+    'SQLALCHEMY_DATABASE_URI': 'sqlite:///../database.db',
     'DEBUG': False,
     'HOST': '127.0.0.1',
     'POST': 5000

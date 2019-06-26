@@ -1,5 +1,5 @@
 from wtforms import Form, TextField, IntegerField
-from wtforms.validators import DataRequired, Regexp, Email
+from wtforms.validators import DataRequired, Regexp, Email, Length, NumberRange
 import re
 
 
@@ -8,34 +8,43 @@ name_regex = re.compile('[A-Za-z]+')
 
 class SignupForm(Form):
 	firstname = TextField(
-		label='Vorname:', 
+		label='Vorname:',
 		validators=[
 			DataRequired('Der Vorname darf nicht leer sein.'),
-			Regexp(name_regex, message='Der Vorname enstpricht nicht dem gewünschten Format.')
+			Regexp(name_regex, message='Der Vorname enstpricht nicht dem gewünschten Format.'),
+			Length(max=30, message='Der Vorname ist zu lang.')
 		]
 	)
 
 	lastname = TextField(
-		label='Nachname:', 
+		label='Nachname:',
 		validators=[
-			DataRequired('Der Nachname darf nicht leer sein.'), 
-			Regexp(name_regex, message='Der Nachname enstpricht nicht dem gewünschten Format.')
+			DataRequired('Der Nachname darf nicht leer sein.'),
+			Regexp(name_regex, message='Der Nachname enstpricht nicht dem gewünschten Format.'),
+			Length(max=30, message='Der Nachname ist zu lang.')
 		]
 	)
 
 	club = TextField(
-		label='Verein:'
+		label='Verein:',
+		validators=[
+			Length(max=120, message='Der Vereinsname ist zu lang.')
+		]
 	)
 
 	email = TextField(
-		label='EMail:', 
+		label='EMail:',
 		validators=[
 			DataRequired('Die EMail darf nicht leer sein.'),
-			Email('Die Email enstpricht nicht dem gewünschten Format.')
+			Email('Die Email enstpricht nicht dem gewünschten Format.'),
+			Length(max=120, message='Die Email ist zu lang.')
 		]
 	)
 
 	dwz = IntegerField(
 		label='DWZ:',
-		default=0
+		default=0,
+		validators=[
+			NumberRange(min=0, message='Die DWZ ist zu klein.')
+		]
 	)
