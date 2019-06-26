@@ -45,6 +45,21 @@
 		</table>
 	</form>
 
+	<table id="player_table">
+		<tr>
+			<th>Name</th>
+			<th>Verein</th>
+			<th>DWZ</th>
+		</tr>
+		{% for player in players %}
+			<tr>
+				<td>{{ player.firstname }} {{ player.lastname }}</td>
+				<td>{{ player.club }}</td>
+				<td>{{ player.dwz }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+
 	<script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 

@@ -1,9 +1,11 @@
 from smtl.app import app
+from smtl.routes import routes
 from config import config
 import os
 
 
 def main():
+	app.register_blueprint(routes)
 	host = config.get('HOST', '127.0.0.1')
 	port = config.get('PORT', 5000)
 	debug = config.get('DEBUG', False)

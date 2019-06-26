@@ -3,15 +3,11 @@ from wtforms.validators import DataRequired, Regexp, Email, Length, NumberRange
 import re
 
 
-name_regex = re.compile('[A-Za-z]+')
-
-
 class SignupForm(Form):
 	firstname = TextField(
 		label='Vorname:',
 		validators=[
 			DataRequired('Der Vorname darf nicht leer sein.'),
-			Regexp(name_regex, message='Der Vorname enstpricht nicht dem gewünschten Format.'),
 			Length(max=30, message='Der Vorname ist zu lang.')
 		]
 	)
@@ -20,7 +16,6 @@ class SignupForm(Form):
 		label='Nachname:',
 		validators=[
 			DataRequired('Der Nachname darf nicht leer sein.'),
-			Regexp(name_regex, message='Der Nachname enstpricht nicht dem gewünschten Format.'),
 			Length(max=30, message='Der Nachname ist zu lang.')
 		]
 	)

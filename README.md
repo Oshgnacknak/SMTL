@@ -26,4 +26,4 @@ pyhton run.py
 
 ## TODO
 
-- Create any form of database for the players.
+- Use captcha
