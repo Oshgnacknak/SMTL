@@ -8,13 +8,8 @@ class Player(db.Model):
         nullable=False
     )
 
-    firstname = db.Column(
-        db.String(30),
-        nullable=False
-    )
-
-    lastname = db.Column(
-        db.String(30),
+    name = db.Column(
+        db.String(60),
         nullable=False
     )
 
@@ -33,4 +28,4 @@ class Player(db.Model):
     )
 
     def __repr__(self):
-        return f'Player@{self.id}({self.firstname} {self.lastname})'
+        return f'Player@{self.id}({self.name})'

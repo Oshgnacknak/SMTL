@@ -1,6 +1,6 @@
 <form action="/signup" id="signup_form" method="POST">
   <table>
-    {% for field in [form.firstname, form.lastname, form.club, form.dwz, form.email] %}
+    {% for field in [form.name, form.club, form.dwz, form.email] %}
       <tr>
         <td>{{ field.label }}</td>
         <td>{{ field }}</td>

@@ -4,19 +4,11 @@ import re
 
 
 class SignupForm(Form):
-	firstname = TextField(
-		label='Vorname:',
+	name = TextField(
+		label='Name:',
 		validators=[
-			DataRequired('Der Vorname darf nicht leer sein.'),
-			Length(max=30, message='Der Vorname ist zu lang.')
-		]
-	)
-
-	lastname = TextField(
-		label='Nachname:',
-		validators=[
-			DataRequired('Der Nachname darf nicht leer sein.'),
-			Length(max=30, message='Der Nachname ist zu lang.')
+			DataRequired('Der Name darf nicht leer sein.'),
+			Length(max=60, message='Der Vorname ist zu lang.')
 		]
 	)
 

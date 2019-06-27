@@ -15,8 +15,7 @@ def signup():
     form = SignupForm(request.form)
     if form.validate():
         p = Player(
-            firstname=form.data['firstname'],
-            lastname=form.data['lastname'],
+            name=form.data['name'],
             club=form.data['club'],
             email=form.data['email'],
             dwz=form.data['dwz']
@@ -28,7 +27,7 @@ def signup():
         except SQLAlchemyError as e:
             print(e, file=sys.stderr)
             return 'Database Error!', 500
-        flash(f'{p.firstname} {p.lastname} wurde hinzugefügt.')
+        flash(f'{p.name} wurde hinzugefügt.')
     else:
         for messages in form.errors.values():
             for message in messages:
