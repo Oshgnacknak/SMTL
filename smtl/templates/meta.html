@@ -1,0 +1,5 @@
+{% if meta %}
+  {% for name, content in meta.items() %}
+    <meta name="{{ name }}" content="{{ content }}">
+  {% endfor %}
+{% endif %}
