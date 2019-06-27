@@ -1,10 +1,10 @@
 <form action="/signup" id="signup_form" method="POST">
   <table>
     {% for field in [form.firstname, form.lastname, form.club, form.dwz, form.email] %}
-    <tr>
-      <td>{{ field.label }}</td>
-      <td>{{ field }}</td>
-    </tr>
+      <tr>
+        <td>{{ field.label }}</td>
+        <td>{{ field }}</td>
+      </tr>
     {% endfor %}
     <tr>
       <td>

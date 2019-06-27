@@ -1,11 +1,16 @@
 
-# create your config here and safe as 'config.py'
-# 'SECRET_KEY' must be set. $ head -c 32 /dev/random | sha1sum
-# the rest is optional
+# Create your config here and safe as 'config.py'.
+# Things in 'app_config' must all be set. ($ head -c 32 /dev/random | sha1sum)
+# the 'run_config' is optional but has to be a dict.
 
-config = {
-    'SECRET_KEY': 'some_good_key',
+app_config = {
+    'SECRET_KEY': 'some_key',
     'SQLALCHEMY_DATABASE_URI': 'sqlite:///../database.db',
+    'RECAPTCHA_PUBLIC_KEY': 'some_other_key',
+    'RECAPTCHA_PRIVATE_KEY': 'some_otherer_key'
+}
+
+run_config = {
     'DEBUG': False,
     'HOST': '127.0.0.1',
     'POST': 5000
