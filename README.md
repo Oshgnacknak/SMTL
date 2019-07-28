@@ -16,14 +16,9 @@ cd SMTL
 # Install dependencies
 pip install -r requirements.txt
 
-# Create config.py and change the 'SECRET_KEY'
+# Create config.py and edit it to your likings
 cp config.py.dist config.py
 
 # Execute run.py
 pyhton run.py
 ```
-
-
-## TODO
-
-- Use captcha

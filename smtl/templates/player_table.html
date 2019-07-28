@@ -5,11 +5,11 @@
       <th>Verein</th>
       <th>DWZ</th>
     </tr>
-    {% for player in players %}
+    {% for player in players: %}
       <tr>
         <td>{{ player.name }}</td>
-        <td>{{ player.club }}</td>
-        <td>{{ player.dwz }}</td>
+        <td>{{ player.club or '-'}}</td>
+        <td>{{ player.dwz or 0 }}</td>
       </tr>
     {% endfor %}
   </table>

@@ -4,7 +4,7 @@ from smtl.signup_form import SignupForm
 from smtl.meta import meta
 from smtl.app import db
 from smtl.models.player import Player
-import sys
+from smtl.logging import logger
 
 
 routes = Blueprint('routes', __name__)
@@ -14,25 +14,34 @@ routes = Blueprint('routes', __name__)
 def signup():
     form = SignupForm(request.form)
     if form.validate():
-        p = Player(
-            name=form.data['name'],
-            club=form.data['club'],
-            email=form.data['email'],
-            dwz=form.data['dwz']
-        )
-        print(f'{request.remote_addr} is trying to add {p}', file=sys.stderr)
         try:
-            db.session.add(p)
-            db.session.commit()
+            p = add_player(form)
+            logger.info(request.remote_addr + ' added ' + str(p))
         except SQLAlchemyError as e:
-            print(e, file=sys.stderr)
+            logger.error('Database Error: ' + e)
             return 'Database Error!', 500
-        flash(f'{p.name} wurde hinzugefügt.')
     else:
-        for messages in form.errors.values():
-            for message in messages:
-                flash(message, 'error')
+        show_errors(form)
     return redirect('/', code=302)
+
+
+def add_player(form):
+    p = Player(
+        name=form.data['name'],
+        club=form.data['club'],
+        email=form.data['email'],
+        dwz=form.data['dwz']
+    )
+    db.session.add(p)
+    db.session.commit()
+    flash(f'{p.name} wurde hinzugefügt.')
+    return p
+
+
+def show_errors(form):
+    for messages in form.errors.values():
+        for message in messages:
+            flash(message, 'error')
 
 
 @routes.route('/')
@@ -44,5 +53,5 @@ def home():
         title='Stadtmeisterschaft',
         form=form,
         meta=meta,
-		players=Player.query.all()
+		players=Player.query.filter_by(approved=True).all()
     )

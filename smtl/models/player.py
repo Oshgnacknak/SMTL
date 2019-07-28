@@ -26,6 +26,11 @@ class Player(db.Model):
         db.Integer(),
         default=0
     )
+    
+    approved = db.Column(
+        db.Boolean(),
+        default=False
+    )
 
-    def __repr__(self):
-        return f'Player@{self.id}({self.name})'
+    def __str__(self):
+        return f'Player({self.name})'
