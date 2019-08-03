@@ -1,20 +1,45 @@
-{% if players %}
+{% extends 'base.html' %}
+{% block content %}
   <table id="player_table">
     <tr>
       <th>Name</th>
       <th>Verein</th>
       <th>DWZ</th>
+      <th>Attr.</th>
     </tr>
-    {% for player in players: %}
-      <tr>
-        <td>{{ player.name }}</td>
-        <td>{{ player.club or '-'}}</td>
-        <td>{{ player.dwz or 0 }}</td>
-      </tr>
-    {% endfor %}
   </table>
-{% else %}
-  <div id="player_table" class="no_players">
-    <b>Noch keine Spieler...</b>
-  </div>
-{% endif %}
+
+  <script>
+    const sorter = {
+      dwz: (a, b) => a.dwz - b.dwz,
+      name: (a, b) => a.name < b.name,
+      club: (a, b) => a.club < b.club,
+      attr: (a, b) => a.attr < b.attr
+    }
+
+    const table = getElementById('player_table');
+    let players;
+
+    function render() {
+      Array.from(table.querySelectorAll(':scope .data'))
+        .forEach(e => e.remove());
+      players.sort(sorter.dwz);
+      players.forEach(p => {
+        const tr = document.createElement('tr');
+        tr.classList.add("data");
+        ['name', 'club', 'dwz', 'attr'].forEach(k =>
+          td.innerHTML += `<td>${p[k]}</td>\n`);
+        table.appendChild(tr);
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      fetch('/api/get_players')
+        .then(r => r.json())
+        .then(p => {
+          players = p;
+          render();
+        });
+    });
+  </script>
+{% endblock %}

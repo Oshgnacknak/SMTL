@@ -1,17 +1,46 @@
-<form action="/signup" id="signup_form" method="POST">
-  <table>
-    {% for field in [form.name, form.club, form.dwz, form.email] %}
+{% extends 'base.html' %}
+{% block content %}
+  <form id="signup_form" method="POST">
+    <table>
+      {% for field in [form.name, form.gender, form.birth_year, form.club, form.dwz, form.email] %}
+        <tr>
+          <td>{{ field.label }}</td>
+          <td>{{ field }}</td>
+        </tr>
+      {% endfor %}
       <tr>
-        <td>{{ field.label }}</td>
-        <td>{{ field }}</td>
+        <td>
+          <input type="submit" value="Teilnehmen">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        </td>
+        <td><input type="reset" value="Löschen"></td>
       </tr>
-    {% endfor %}
-    <tr>
-      <td>
-        <input type="submit" value="Teilnehmen">
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-      </td>
-      <td><input type="reset" value="Löschen"></td>
-    </tr>
-  </table>
-</form>
+    </table>
+  </form>
+  <script>
+    const form = document.getElementById('signup_form');
+    form.onsubmit = e => {
+      e.preventDefault();
+      fetch('/api/add_player', {
+        method: 'POST',
+        body: new FormData(form)
+      })
+      .then(r => r.json())
+      .then(r => {
+        if (r.status == 'success') {
+          alert(r.message);
+          form.reset();
+        } else if (r.form_errors) {
+          Array.from(form.elements)
+            .filter(e => r.form_errors[e.name])
+            .forEach(e => {
+              e.setCustomValidity(r.form_errors[e.name].join('\n'))
+              e.checkValidity();
+            });
+        } else {
+          throw new Error(r.message);
+        }
+      });
+    }
+  </script>
+{% endblock %}

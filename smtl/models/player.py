@@ -1,4 +1,12 @@
 from smtl.app import db
+from smtl.utils import current_year
+from enum import Enum
+
+
+class Gender(Enum):
+    MALE = 'M'
+    FEMALE = 'W'
+    DIVERSE = 'D'
 
 
 class Player(db.Model):
@@ -10,6 +18,16 @@ class Player(db.Model):
 
     name = db.Column(
         db.String(60),
+        nullable=False
+    )
+
+    gender = db.Column(
+        db.Enum(Gender),
+        default=Gender.DIVERSE
+    )
+
+    birth_year = db.Column(
+        db.Integer(),
         nullable=False
     )
 
@@ -26,11 +44,29 @@ class Player(db.Model):
         db.Integer(),
         default=0
     )
-    
+
     approved = db.Column(
         db.Boolean(),
         default=False
     )
+
+    def to_dict(self):
+        return {
+            'name': self.name,
+            'dwz': self.dwz,
+            'club': self.club,
+            'attr': self.get_attr()
+        }
+
+    def get_attr(self):
+        attr = ''
+        if self.gender != Gender.MALE:
+            attr += self.gender.values
+        if self.birth_year >= 2001:
+            attr += 'J'
+        elif self.birth_year < 1960:
+            attr += 'S'
+        return attr
 
     def __str__(self):
         return f'Player({self.name})'

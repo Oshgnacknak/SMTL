@@ -1,0 +1,22 @@
+<!doctype html>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		{% if title: %}
+			<title>Stadtmeisterschaft - {{ title }}</title>
+		{% else: %}
+			<title>Stadtmeisterschaft</title>
+		{% endif %}
+
+		{% include 'meta.html' %}
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+	</head>
+	<body>
+		{% if title: %}
+			<h2 id="title">{{ title }}</h2>
+		{% endif %}
+		{% block content %}
+		{% endblock %}
+	</body>
+</html>

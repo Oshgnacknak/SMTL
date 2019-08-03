@@ -3,6 +3,12 @@
 # Things in 'app_config' must all be set. ($ head -c 32 /dev/random | sha1sum)
 # the 'run_config' is optional but has to be a dict.
 
+meta = {
+    "description": "Teilnehmerliste und Anmeldeformular der Langener Stadtmeisterschaft 2019",
+    "author": "SK Langen e.V."
+}
+
+
 app_config = {
     'SECRET_KEY': 'some_key',
     'SQLALCHEMY_DATABASE_URI': 'sqlite:///../database.db',
