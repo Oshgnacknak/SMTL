@@ -17,7 +17,7 @@
       attr: (a, b) => a.attr < b.attr
     }
 
-    const table = getElementById('player_table');
+    const table = document.getElementById('player_table');
     let players;
 
     function render() {
@@ -28,7 +28,7 @@
         const tr = document.createElement('tr');
         tr.classList.add("data");
         ['name', 'club', 'dwz', 'attr'].forEach(k =>
-          td.innerHTML += `<td>${p[k]}</td>\n`);
+          tr.innerHTML += `<td>${p[k]}</td>\n`);
         table.appendChild(tr);
       });
     }

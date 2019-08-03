@@ -19,7 +19,7 @@ def add_player():
             form_errors=form.errors
         )
     try:
-        p = add_player(form)
+        p = save_player(form)
         logger.info(request.remote_addr + ' added ' + str(p))
         return jsonify(status='success', message=f'{p.name} wurde hinzugefügt.')
     except SQLAlchemyError as e:
@@ -27,7 +27,7 @@ def add_player():
         return jsonify(status='error', message='Database Error!'), 500
 
 
-def add_player(form):
+def save_player(form):
     p = Player(
         name=form.data['name'],
         gender=Gender[form.data['gender']],

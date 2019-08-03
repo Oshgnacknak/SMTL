@@ -8,10 +8,17 @@ meta = {
     "author": "SK Langen e.V."
 }
 
-
 app_config = {
     'SECRET_KEY': 'some_key',
-    'SQLALCHEMY_DATABASE_URI': 'sqlite:///../database.db',
+
+      # db uri
+      # memory
+      'SQLALCHEMY_DATABASE_URI': 'sqlite:///:memory:',
+      # sqlite
+      #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../db.db'
+      # mysql
+      #app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://username:password@server.site.com/database'
+
     'RECAPTCHA_PUBLIC_KEY': 'some_other_key',
     'RECAPTCHA_PRIVATE_KEY': 'some_otherer_key'
 }
