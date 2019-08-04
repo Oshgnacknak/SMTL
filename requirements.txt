@@ -4,3 +4,4 @@ flask_wtf
 flask-sqlalchemy
 flask_caching
 pymysql
+mysqlclient
