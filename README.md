@@ -4,7 +4,7 @@ This webapp is for for the 'Stadtmeisterschaft' players
 list and the singup form written in python/flask.
 
 
-## How to Run
+## Run
 
 ```
 # Clone this repository
@@ -25,5 +25,16 @@ pyhton run.py
 
 ## Docker 
 ```
-docker run --rm -p 5000:5000 -e SECRET_KEY=secret -e SQLALCHEMY_DATABASE_URI='sqlite:///:memory:' --name name smtl
+# Build from Github
+docker build https://github.com/Oshgnacknak/SMTL -t smtl
+
+# Run exposing ports 
+# Set secret key, port and database uri here
+docker run -d \
+	-p 80:80 \
+	-e PORT=80 \
+	-e SECRET_KEY=secret \
+	-e SQLALCHEMY_DATABASE_URI='sqlite:///:memory:' \
+	--name name \
+	smtl
 ```
