@@ -3,17 +3,16 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
+
 		{% if title: %}
 			<title>Stadtmeisterschaft - {{ title }}</title>
 		{% else: %}
 			<title>Stadtmeisterschaft</title>
 		{% endif %}
 
-		{% if meta %}
-		  {% for name, content in meta.items() %}
-		    <meta name="{{ name }}" content="{{ content }}">
-		  {% endfor %}
-		{% endif %}
+    <meta name="description" content="Teilnehmerliste und Anmeldeformular der Langener Stadtmeisterschaft 2019">
+    <meta name="author" content="SK Langen e.V.">
+
 	</head>
 	<body>
 		{% if title: %}

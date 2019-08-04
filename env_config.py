@@ -1,13 +1,8 @@
 from os import environ
 
 
-meta = {
-    "description": "Teilnehmerliste und Anmeldeformular der Langener Stadtmeisterschaft 2019",
-    "author": "SK Langen e.V."
-}
-
 app_config = {
-    'SECRET_KEY': environ['SECRET_KEY'], 
+    'SECRET_KEY': environ['SECRET_KEY'],
     'SQLALCHEMY_DATABASE_URI': environ['SQLALCHEMY_DATABASE_URI']
 }
 
