@@ -26,7 +26,7 @@ pyhton run.py
 ## Docker 
 ```
 # Build from Github
-docker build https://github.com/Oshgnacknak/SMTL -t smtl
+docker build github.com/Oshgnacknak/SMTL -t smtl
 
 # Run and set secret key, port and database uri here
 docker run -d \
