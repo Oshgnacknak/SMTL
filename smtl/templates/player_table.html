@@ -1,5 +1,39 @@
 {% extends 'base.html' %}
 {% block content %}
+  <style>
+    #player_table {
+      width: 100%;
+      text-align: center;
+    }
+    
+    #player_table th {
+      font-size: 24px;
+    }
+    
+    #player_table tr:nth-child(2n) {
+      background: #97d9e5;
+    }
+
+    #player_table td {
+      padding: 2px 5px;
+    }
+
+    #player_table .name, .club {
+      text-align: left;
+      width: 40%;
+    }
+  </style>
+
+  <form id="sort">
+    <label for="key">Sortieren nach</label>
+    <select name="key">
+      <option value="dwz">DWZ</option>
+      <option value="name">Name</option>
+      <option value="club">Verein</option>
+      <option value="attr">Attr.</option>
+    </select>
+  </form>
+
   <table id="player_table">
     <tr>
       <th>Name</th>
@@ -11,35 +45,49 @@
 
   <script>
     const sorter = {
-      dwz: (a, b) => a.dwz - b.dwz,
-      name: (a, b) => a.name < b.name,
-      club: (a, b) => a.club < b.club,
-      attr: (a, b) => a.attr < b.attr
+        name(a, b) {
+          return a.name > b.name;
+        },
+        club(a, b) {
+          return a.club > b.club;
+        },
+        dwz(a, b) {
+          return b.dwz - a.dwz;
+        },
+        attr(a, b) {
+          return a.attr > b.attr;
+        }
     }
 
-    const table = document.getElementById('player_table');
-    let players;
+    class Table {
+      constructor(players) {
+        this.players = players;
+        this.table = document.getElementById('player_table');
+        this.sort = document.getElementById('sort');
+        this.createTrs();
+        this.sort.onchange = () => this.render();
+        this.render();
+      }
 
-    function render() {
-      Array.from(table.querySelectorAll(':scope .data'))
-        .forEach(e => e.remove());
-      players.sort(sorter.dwz);
-      players.forEach(p => {
-        const tr = document.createElement('tr');
-        tr.classList.add("data");
-        ['name', 'club', 'dwz', 'attr'].forEach(k =>
-          tr.innerHTML += `<td>${p[k]}</td>\n`);
-        table.appendChild(tr);
-      });
+      render() {
+        this.players.forEach(p => p.tr.remove());
+        this.players.sort(sorter[this.sort.key.value]);
+        this.players.forEach(p => this.table.appendChild(p.tr));
+      }
+
+      createTrs() {
+        this.players.forEach(p => {
+          p.tr = document.createElement('tr');
+          Object.keys(sorter).forEach(k =>
+            p.tr.innerHTML += `<td class="${k}">${p[k]}</td>\n`);
+        });
+      }
     }
 
     window.addEventListener('DOMContentLoaded', () => {
       fetch('/api/get_players')
         .then(r => r.json())
-        .then(p => {
-          players = p;
-          render();
-        });
+        .then(p => new Table(p));
     });
   </script>
 {% endblock %}

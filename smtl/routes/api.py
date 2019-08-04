@@ -44,5 +44,5 @@ def save_player(form):
 @blue_print.route('/get_players')
 @cache.cached(timeout=60*10)
 def get_players():
-    players = Player.query.filter_by(approved=True).all()
+    players = Player.query.filter_by(approved=True).order_by(Player.dwz.desc()).all()
     return jsonify([p.to_dict() for p in players])

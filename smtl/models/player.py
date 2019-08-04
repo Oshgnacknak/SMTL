@@ -54,14 +54,14 @@ class Player(db.Model):
         return {
             'name': self.name,
             'dwz': self.dwz,
-            'club': self.club,
+            'club': self.club or '-',
             'attr': self.get_attr()
         }
 
     def get_attr(self):
         attr = ''
         if self.gender != Gender.MALE:
-            attr += self.gender.values
+            attr += self.gender.value
         if self.birth_year >= 2001:
             attr += 'J'
         elif self.birth_year < 1960:
