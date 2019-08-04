@@ -28,8 +28,7 @@ pyhton run.py
 # Build from Github
 docker build https://github.com/Oshgnacknak/SMTL -t smtl
 
-# Run exposing ports 
-# Set secret key, port and database uri here
+# Run and set secret key, port and database uri here
 docker run -d \
 	-p 80:80 \
 	-e PORT=80 \
