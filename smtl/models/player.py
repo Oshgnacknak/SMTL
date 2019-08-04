@@ -1,5 +1,4 @@
-from smtl.app import db
-from smtl.utils import current_year
+from smtl.app import db, current_year
 from enum import Enum
 
 

@@ -9,8 +9,11 @@
 			<title>Stadtmeisterschaft</title>
 		{% endif %}
 
-		{% include 'meta.html' %}
-		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+		{% if meta %}
+		  {% for name, content in meta.items() %}
+		    <meta name="{{ name }}" content="{{ content }}">
+		  {% endfor %}
+		{% endif %}
 	</head>
 	<body>
 		{% if title: %}

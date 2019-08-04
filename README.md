@@ -1,6 +1,6 @@
 # SMTL
 
-This is a 'single page webapp' for the 'Stadtmeisterschaft' players
+This webapp is for for the 'Stadtmeisterschaft' players
 list and the singup form written in python/flask.
 
 

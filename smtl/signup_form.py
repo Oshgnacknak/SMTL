@@ -1,7 +1,7 @@
 from wtforms import Form, TextField, IntegerField, SelectField
 from wtforms.validators import DataRequired, Regexp, Email, Length, NumberRange
 from smtl.models.player import Gender, Player
-from smtl.utils import current_year
+from smtl.app import current_year
 
 
 class SignupForm(Form):

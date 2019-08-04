@@ -3,7 +3,10 @@ from flask_caching import Cache
 from flask_wtf.csrf import CSRFProtect
 from flask_sqlalchemy import SQLAlchemy
 from config import app_config, run_config
+from datetime import date
 
+
+current_year = date.today().year
 cache = Cache(config={'CACHE_TYPE': 'null' if run_config.get('DEBUG', False) else 'simple'})
 csrf = CSRFProtect()
 app = Flask(__name__)

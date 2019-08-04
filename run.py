@@ -1,7 +1,6 @@
 from smtl.app import app, db
 from smtl.routes import front_end_blue_print, api_blue_print
 from config import run_config
-import os
 
 
 def main():
