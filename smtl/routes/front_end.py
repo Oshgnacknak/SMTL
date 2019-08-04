@@ -1,6 +1,5 @@
 from flask import Blueprint, request, render_template, flash, redirect
 from sqlalchemy.exc import SQLAlchemyError
-from config import meta
 from smtl.signup_form import SignupForm
 from smtl.app import db, cache
 from smtl.models.player import Player
@@ -12,13 +11,12 @@ cache_time = 60*60*3
 
 
 @blue_print.route('/signup')
+@cache.cached(timeout=cache_time)
 def signup():
-    form = SignupForm()
     return render_template(
         'signup_form.html',
         title='Anmeldeformular',
-        meta=meta,
-		form=form
+	form=SignupForm()
     )
 
 
@@ -29,5 +27,4 @@ def player_table():
     return render_template(
         'player_table.html',
         title='Teilnehmerliste',
-        meta=meta,
     )
