@@ -22,3 +22,8 @@ cp config.py.dist config.py
 # Execute run.py
 pyhton run.py
 ```
+
+## Docker 
+```
+docker run --rm -p 5000:5000 -e SECRET_KEY=secret -e SQLALCHEMY_DATABASE_URI='sqlite:///:memory:' --name name smtl
+```
