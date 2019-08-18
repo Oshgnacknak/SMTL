@@ -20,7 +20,7 @@ else:
 
 
 run_config = {
-    'DEBUG': int(environ.get('DEBUG', False)),
+    'DEBUG': int(environ.get('DEBUG', 0)),
     'HOST': environ.get('HOST', '0.0.0.0'),
     'POST': int(environ.get('POST', 5000))
 }

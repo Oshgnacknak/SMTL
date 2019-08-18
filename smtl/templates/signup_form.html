@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
+  <p>
+    Sie werden per EMail informiert sobald ihre Anmeldung bearbeitet wurde.
+  </p>
   <form id="signup_form" method="POST">
     <table>
       {% for field in [form.name, form.gender, form.birth_year, form.club, form.dwz, form.email] %}
