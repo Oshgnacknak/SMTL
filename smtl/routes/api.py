@@ -4,6 +4,7 @@ from smtl.signup_form import SignupForm
 from smtl.app import db, cache
 from smtl.models.player import Player, Gender
 from smtl.logging import logger
+from smtl.email import default_mail
 
 
 blue_print = Blueprint('api', __name__)
@@ -20,7 +21,10 @@ def add_player():
         )
     try:
         p = save_player(form)
-        logger.info(request.remote_addr + ' added ' + str(p))
+        msg = request.remote_addr + ' added ' + str(p)
+        logger.info(msg)
+        if default_mail:
+            default_mail.send(subject=msg, body=msg)
         return jsonify(status='success', message=f'{p.name} wurde hinzugefügt.')
     except SQLAlchemyError as e:
         logger.error('Database Error: ' + str(e))

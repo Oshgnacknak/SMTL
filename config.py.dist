@@ -6,13 +6,23 @@
 app_config = {
     'SECRET_KEY': 'some_key',
 
-      # db uri
-      # memory
-      'SQLALCHEMY_DATABASE_URI': 'sqlite:///:memory:',
-      # sqlite
-      #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../db.db'
-      # mysql
-      #app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://username:password@server.site.com/database'
+    # db uri
+    # memory
+    'SQLALCHEMY_DATABASE_URI': 'sqlite:///:memory:',
+    # sqlite
+    #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../db.db'
+    # mysql
+    #app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://username:password@server.site.com/database'
+}
+
+# If this is filled this server will
+# send an email each time somebody signs up.
+# To disable leave the dict empty
+email_config = {
+    'HOST': 'some_host',
+    'PORT': 587,
+    'ADDR': 'some_mail',
+    'PASSWORD': 'some_password'
 }
 
 run_config = {
