@@ -1,5 +1,18 @@
 FROM python:3.7
 
+ENV SECRET_KEY
+ENV SQLALCHEMY_DATABASE_URI
+
+ENV EMAIL_HOST
+ENV EMAIL_PORT 587
+ENV EMAIL_ADDR
+ENV EMAIL_USER
+ENV EMAIL_PASSWORD
+
+ENV DEBUG False
+ENV HOST 0.0.0.0
+ENV POST 5000
+
 WORKDIR /usr/src/app
 
 COPY requirements.txt ./
@@ -10,5 +23,5 @@ COPY . .
 
 EXPOSE 5000
 
-CMD [ "python", "./run.py" ]
+ENTRYPOINT [ "python", "./run.py" ]
 

@@ -7,6 +7,18 @@ app_config = {
 }
 
 
+if 'EMAIL_HOST' in environ:
+    email_config = {
+        'HOST': environ.get('EMAIL_HOST'),
+        'PORT': int(environ.get('EMAIL_PORT', 587)),
+        'ADDR': environ.get('EMAIL_ADDR'),
+        'USER': environ.get('EMAIL_USER'),
+        'PASSWORD': environ.get('EMAIL_PASSWORD')
+    }
+else:
+    email_config = {}
+
+
 run_config = {
     'DEBUG': environ.get('DEBUG', False),
     'HOST': environ.get('HOST', '0.0.0.0'),

@@ -22,6 +22,7 @@ email_config = {
     'HOST': 'some_host',
     'PORT': 587,
     'ADDR': 'some_mail',
+    'USER' :'some_user', # None for ADDR
     'PASSWORD': 'some_password'
 }
 
