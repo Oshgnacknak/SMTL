@@ -68,4 +68,4 @@ class Player(db.Model):
         return attr
 
     def __str__(self):
-        return f'Player({self.name})'
+        return f'Player@{self.id}({self.name})'
