@@ -6,19 +6,17 @@ from smtl.logging import logger
 
 
 class EMail:
-    def __init__(self, host, port=None, addr=''):
-        self.server = smtplib.SMTP(host, port or 587)
+    def __init__(self, host, port=None, addr='', user=None, password=None):
+        self.host = host
+        self.port = port or 587
         self.addr = addr
+        self.user = user or addr
+        self.password = password
 
-    def login(self, user=None, password=''):
-        self.server.login(user or self.addr, password)
-
-    def is_connected(self):
-        try:
-            status = self.server.noop()[0]
-        except smtplib.SMTPServerDisconnected:
-            status = -1
-        return True if status == 250 else False
+    def create_connection(self, ):
+        connection = smtplib.SMTP(self.host, self.port)
+        connection.login(self.user, self.password)
+        return connection
 
     def send(self, from_addr=None, to_addr=None, subject='', body=''):
         msg = MIMEMultipart()
@@ -27,21 +25,19 @@ class EMail:
         msg['Subject'] = subject
         msg.attach(MIMEText(body))
 
-        if not self.is_connected():
-            self.server.connect()
-        self.server.sendmail(msg['From'], msg['To'], msg.as_string())
+        try:
+            self.create_connection().sendmail(msg['From'], msg['To'], msg.as_string())
+        except smtplib.SMTPException as e:
+            logger.error('Error sending mail: ' + str(e))
 
 
 if email_config:
     default_mail = EMail(
         host=email_config['HOST'],
         port=email_config.get('PORT'),
-        addr=email_config.get('ADDR')
-    )
-    default_mail.login(
+        addr=email_config.get('ADDR'),
         user=email_config.get('USER'),
         password=email_config['PASSWORD']
     )
-    logger.info('EMail logged in: ' + default_mail.addr)
 else:
     default_mail = None
