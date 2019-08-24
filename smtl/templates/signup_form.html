@@ -43,6 +43,9 @@
         } else {
           throw new Error(r.message);
         }
+      }).catch(e => {
+        console.error(e);
+        alert('Auf Grund eines Fehlers ist die Anfrage gescheitert:\n' + e);
       });
     }
   </script>

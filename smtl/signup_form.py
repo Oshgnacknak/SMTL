@@ -1,12 +1,12 @@
-from wtforms import Form, TextField, IntegerField, SelectField
-from wtforms.validators import DataRequired, Regexp, Email, Length, NumberRange
+from wtforms import Form, StringField, IntegerField, SelectField
+from wtforms.validators import DataRequired, Email, Length, NumberRange
 from smtl.models.player import Gender, Player
 from smtl.app import current_year
 
 
 class SignupForm(Form):
-	name = TextField(
-		label='Name:',
+	name = StringField(
+		label='Name, Vorname:',
 		validators=[
 			DataRequired('Der Name darf nicht leer sein.'),
 			Length(max=Player.name.type.length, message='Der Vorname ist zu lang.')
@@ -27,14 +27,14 @@ class SignupForm(Form):
 		]
 	)
 
-	club = TextField(
+	club = StringField(
 		label='Verein:',
 		validators=[
 			Length(max=Player.club.type.length, message='Der Vereinsname ist zu lang.')
 		]
 	)
 
-	email = TextField(
+	email = StringField(
 		label='EMail:',
 		validators=[
 			DataRequired('Die EMail darf nicht leer sein.'),
