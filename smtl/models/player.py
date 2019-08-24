@@ -57,6 +57,14 @@ class Player(db.Model):
             'attr': self.get_attr()
         }
 
+    def title(self):
+        if self.gender is Gender.DIVERSE:
+            return 'Sehr geehrtes Individuum'
+        if self.gender is Gender.MALE:
+            return 'Sehr geehrter Herr'
+        if self.gender is Gender.FEMALE:
+            return 'Sehr geehrte Frau'
+
     def get_attr(self):
         attr = ''
         if self.gender != Gender.MALE:

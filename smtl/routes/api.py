@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, render_template
 from sqlalchemy.exc import SQLAlchemyError
 from smtl.signup_form import SignupForm
 from smtl.app import db, cache
@@ -23,12 +23,16 @@ def add_player():
         p = save_player(form)
         msg = request.remote_addr + ' added ' + str(p)
         logger.info(msg)
-        if default_mail:
-            default_mail.send(subject=msg, body=msg)
+        send_signup_mail(p, msg)
         return jsonify(status='success', message=f'{p.name} wurde hinzugefügt.')
     except SQLAlchemyError as e:
         logger.error('Database Error: ' + str(e))
         return jsonify(status='error', message='Database Error!'), 500
+
+
+def send_signup_mail(p, msg):
+    if default_mail:
+        default_mail.send(subject=msg, body=msg + '\n\n' + render_template('auto_reply.html', player=p))
 
 
 def save_player(form):

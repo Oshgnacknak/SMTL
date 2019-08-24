@@ -26,7 +26,9 @@ class EMail:
         msg.attach(MIMEText(body))
 
         try:
-            self.create_connection().sendmail(msg['From'], msg['To'], msg.as_string())
+            conn = self.create_connection()
+            conn.sendmail(msg['From'], msg['To'], msg.as_string())
+            conn.quit()
         except smtplib.SMTPException as e:
             logger.error('Error sending mail: ' + str(e))
 
