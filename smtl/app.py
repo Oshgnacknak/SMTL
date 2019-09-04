@@ -8,13 +8,11 @@ from datetime import date
 
 current_year = date.today().year
 cache = Cache(config={'CACHE_TYPE': 'null' if run_config.get('DEBUG', False) else 'simple'})
-csrf = CSRFProtect()
 app = Flask(__name__)
 
 app.config.from_object(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config.update(app_config)
 
-csrf.init_app(app)
 cache.init_app(app)
 db = SQLAlchemy(app)

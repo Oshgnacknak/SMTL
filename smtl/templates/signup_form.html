@@ -3,7 +3,10 @@
   <p>
     Sie werden per EMail informiert sobald ihre Anmeldung bearbeitet wurde.
   </p>
-  <form id="signup_form" method="POST">
+  <noscript>
+    <h2>Bitte aktivieren sie JavaScript.</h2>
+  </noscript>
+  <form id="signup_form" method="POST" action="/api/add_player">
     <table>
       {% for field in [form.name, form.gender, form.birth_year, form.club, form.dwz, form.email] %}
         <tr>
@@ -14,7 +17,6 @@
       <tr>
         <td>
           <input type="submit" value="Teilnehmen">
-          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         </td>
         <td><input type="reset" value="Löschen"></td>
       </tr>
