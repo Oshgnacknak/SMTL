@@ -29,5 +29,5 @@ email_config = {
 run_config = {
     'DEBUG': False,
     'HOST': '127.0.0.1',
-    'POST': 5000
+    'PORT': 5000
 }
