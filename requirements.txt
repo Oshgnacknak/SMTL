@@ -1,7 +1,0 @@
-flask>=1.1.1
-wtforms
-flask_wtf
-flask-sqlalchemy
-flask_caching
-pymysql
-mysqlclient

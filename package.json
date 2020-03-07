@@ -1,0 +1,29 @@
+{
+  "name": "SMTL",
+  "version": "1.0.0",
+  "description": "This webapp is for for the 'Stadtmeisterschaft' players list and the singup.",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm index.js"
+  },
+  "keywords": [],
+  "author": "Oshgnacknak",
+  "repository": "https://github.com/Oshgnacknak/SMTL/",
+  "license": "ISC",
+  "devDependencies": {},
+  "dependencies": {
+    "admin-bro": "^2.0.0",
+    "admin-bro-expressjs": "^2.0.0",
+    "admin-bro-mongoose": "^0.4.1",
+    "bcrypt": "^4.0.1",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
+    "express": "^4.17.1",
+    "express-formidable": "^1.2.0",
+    "express-session": "^1.17.0",
+    "mongoose": "^5.9.3",
+    "morgan": "^1.9.1",
+    "serve-favicon": "^2.5.0",
+    "validator": "^12.2.0"
+  }
+}

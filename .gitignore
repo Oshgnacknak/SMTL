@@ -1,4 +1,1 @@
-config.py
-__pycache__/
-*.py[cod]
-*.db
+node_modules

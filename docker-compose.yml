@@ -1,0 +1,12 @@
+version: '3.1'
+
+services:
+  mongo:
+    image: mongo
+    restart: always
+  smtl:
+    build: .
+    environment:
+      COOKIE_PASSWORD: 'Pm9yr39FZamjga8fPUy34/4g7rm0e8uaTqsIxZ/U7TE='
+    ports:
+      - '3000:3000'
