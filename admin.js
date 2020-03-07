@@ -56,11 +56,10 @@ const adminBro = new AdminBro({
 	}
 })
 
-const cookiePassword = process.env.COOKIE_PASSWORD 
-if (!cookiePassword) {
+const { COOKIE_PASSWORD } = process.env
+if (!COOKIE_PASSWORD) {
 	throw new Error('process.env.COOKIE_PASSWORD must be set')
 }
-
 module.exports = AdminBroExpress.buildAuthenticatedRouter(adminBro, {
 	authenticate: async (email, password) => {
 		const user = await User.findOne({ email })
@@ -72,5 +71,5 @@ module.exports = AdminBroExpress.buildAuthenticatedRouter(adminBro, {
 		}
 		return false
 	},
-	cookiePassword: cookiePassword
+	cookiePassword: COOKIE_PASSWORD
 })

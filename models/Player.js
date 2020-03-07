@@ -19,7 +19,6 @@ const PlayerSchema = new Schema({
 		type: Number,
 		required: true,
 		min: 1,
-		max: 2020,
 		validate: [ Number.isInteger ]
 	},
 	gender: {

@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+                "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+        <head>
+                <meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+                <title>Langener Stadtmeisterschaft 2020</title>
+
+	<style>
+		h1 {
+			text-align: center;
+		}
+	</style>
+        </head>
+        <body>
+		<div class="container">
+			<h1>Langener Stadtmeisterschaft 2020</h1>
+
+			<h2>Teilnehmerliste</h2>
+
+			<table class="table table-responsive">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Verein</th>
+						<th>DWZ</th>
+						<th>Attr.</th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+
+			<h2>Anmeldeformular</h2>
+
+			<form>
+			    <div class="form-group">
+			        <label for="email">Email Adresse</label>
+			        <input type="email" class="form-control" name="email" required="true" aria-describedby="emailHelp" placeholder="email@example.com">
+			        <small id="emailHelp" class="form-text text-muted">Ihre Email Adresse wird nicht veröffentlicht</small>
+			    </div>
+			    <div class="form-group">
+			        <label for="name">Name</label>
+			        <input type="text" class="form-control" name="name" required="true" placeholder="Name, Vorname" />
+			    </div>
+			    <div class="form-group">
+			        <label for="birth_year">Geburtsjahr</label>
+			        <input type="number" class="form-control" name="birth_year" required="true" placeholder="1648" />
+			    </div>
+			    <div class="form-group">
+					<label for="gender">Geschlecht</label>
+					<select class="form-control" name="gender">
+						<option value="MALE">Männlich</option>
+						<option value="FIMALE">Weiblich</option>
+						<option value="OTHER">Divers</option>
+					</select>
+			    </div>
+			    <div class="form-group">
+			        <label for="club">Verein</label>
+			        <input type="text" class="form-control" name="club" placeholder="SK Langen" />
+			    </div>
+			    <div class="form-group">
+			        <label for="dwz">DWZ</label>
+			        <input type="number" class="form-control" name="dwz" value="0" />
+			    </div>
+			    <button type="submit" class="btn btn-primary">Teilnehmen</button>
+			</form>
+		</div>
+
+		<script defer>
+			const table = document.querySelector('table tbody')
+
+			fetch('/players?no_cache=' + Date.now())
+				.then(res => res.json())
+				.then(players => {
+					table.innerHTML = ''
+					players.forEach(player => {
+						const tr = document.createElement('tr');
+						[ 'name', 'club', 'dwz', 'attr' ].forEach(key => {
+							const td = document.createElement('td')
+							td.innerText = player[key]
+							tr.appendChild(td)
+						})
+						table.appendChild(tr)
+					})
+				})
+
+			const form = document.querySelector('form')
+			form.addEventListener('submit', e => {
+				e.preventDefault()
+				const data = Object.fromEntries(new FormData(form))
+
+				fetch('/players', { 
+					method: 'POST', 
+					body: JSON.stringify(data), 
+					headers: { 'content-type': 'application/json' } 
+				})
+					.then(res => {
+						if (!res.ok) {
+							throw res
+						}
+						return res.json()
+					})
+					.then(res => {
+						alert('Ihre Teilnahme wurde erfolgreich erfasst!\nBitte haben Sie Geduld, bis sie bearbeitet wurde.')
+						form.reset()
+					})
+					.catch(err => err.json().then(errors => {
+						Array.from(form.elements)
+							.filter(e => errors.errors.hasOwnProperty(e.name))
+							.forEach(e => {
+								e.setCustomValidity(errors.errors[e.name].message)
+								e.checkValidity();
+								e.addEventListener('change', () => e.setCustomValidity(''))
+							});
+					}))
+			})
+
+		</script>
+        </body>
+</html>
